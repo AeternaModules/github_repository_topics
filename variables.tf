@@ -1,6 +1,6 @@
-variable "repository_topicses" {
+variable "repository_topics" {
   description = <<EOT
-Map of repository_topicses, attributes below
+Map of repository_topics, attributes below
 Required:
     - repository
     - topics
@@ -12,7 +12,7 @@ EOT
   }))
   validation {
     condition = alltrue([
-      for k, v in var.repository_topicses : (
+      for k, v in var.repository_topics : (
         can(regex("^[-a-zA-Z0-9_.]{1,100}$", v.repository))
       )
     ])
@@ -20,7 +20,7 @@ EOT
   }
   validation {
     condition = alltrue([
-      for k, v in var.repository_topicses : (
+      for k, v in var.repository_topics : (
         alltrue([for x in v.topics : can(regex("^[a-z0-9][a-z0-9-]{0,49}$", x))])
       )
     ])
